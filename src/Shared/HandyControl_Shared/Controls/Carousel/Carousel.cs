@@ -116,6 +116,8 @@ namespace HandyControl.Controls
             set => SetValue(PageButtonStyleProperty, value);
         }
 
+        public event Action<int> OnPageIndexChanged = i => { };
+
         public Carousel()
         {
             CommandBindings.Add(new CommandBinding(ControlCommands.Prev, ButtonPrev_OnClick));
@@ -190,6 +192,7 @@ namespace HandyControl.Controls
                 else
                     _pageIndex = value;
                 UpdatePageButtons(_pageIndex);
+                OnPageIndexChanged(_pageIndex);
             }
         }
 
